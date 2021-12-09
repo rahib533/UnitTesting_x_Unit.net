@@ -1,0 +1,12 @@
+C:\Users\cafarovr\source\repos\UnitTesting\Calculator\bin\Debug\net5.0\Calculator.deps.json
+C:\Users\cafarovr\source\repos\UnitTesting\Calculator\bin\Debug\net5.0\Calculator.dll
+C:\Users\cafarovr\source\repos\UnitTesting\Calculator\bin\Debug\net5.0\ref\Calculator.dll
+C:\Users\cafarovr\source\repos\UnitTesting\Calculator\bin\Debug\net5.0\Calculator.pdb
+C:\Users\cafarovr\source\repos\UnitTesting\Calculator\obj\Debug\net5.0\Calculator.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\cafarovr\source\repos\UnitTesting\Calculator\obj\Debug\net5.0\Calculator.AssemblyInfoInputs.cache
+C:\Users\cafarovr\source\repos\UnitTesting\Calculator\obj\Debug\net5.0\Calculator.AssemblyInfo.cs
+C:\Users\cafarovr\source\repos\UnitTesting\Calculator\obj\Debug\net5.0\Calculator.csproj.CoreCompileInputs.cache
+C:\Users\cafarovr\source\repos\UnitTesting\Calculator\obj\Debug\net5.0\Calculator.dll
+C:\Users\cafarovr\source\repos\UnitTesting\Calculator\obj\Debug\net5.0\ref\Calculator.dll
+C:\Users\cafarovr\source\repos\UnitTesting\Calculator\obj\Debug\net5.0\Calculator.pdb
+C:\Users\cafarovr\source\repos\UnitTesting\Calculator\obj\Debug\net5.0\Calculator.csprojAssemblyReference.cache
