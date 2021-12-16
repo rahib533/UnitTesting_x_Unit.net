@@ -154,7 +154,8 @@ namespace MVC.Project.Controllers
 
         private async Task<bool> ProductExists(int id)
         {
-            return await _context.GetById(id) == null ? false : true;
+            var test = await _context.GetById(id) == null ? false : true;
+            return test;
         }
     }
 }

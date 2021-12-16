@@ -116,61 +116,15 @@ namespace MVC.Project.Test
         [Fact]
         public void Create_GetActionExecutes_ReturnView()
         {
-            List<Category> categories = new List<Category>
-            {
-                new Category
-                {
-                    CategoryId = 1,
-                    CategoryName = "Test",
-                    Description = "Test",
-                }
-            };
-            List<Supplier> suppliers = new List<Supplier>
-            {
-                new Supplier
-                {
-                    SupplierId = 1,
-                    CompanyName = "Test",
-                    ContactName = "Test",
-                }
-            };
-
-            DbSet<Category> myDbSetCategory = Tools.GetQueryableMockDbSet<Category>(categories);
-            DbSet<Supplier> myDbSetSupplier = Tools.GetQueryableMockDbSet<Supplier>(suppliers);
-
-            _mockCategory.Setup(x => x.GetDbSet()).Returns(myDbSetCategory);
-            _mockSupplier.Setup(x => x.GetDbSet()).Returns(myDbSetSupplier);
-           var result = _productsController.Create();
-           var viewResult = Assert.IsType<ViewResult>(result);
+            AdjustDbSet();
+            var result = _productsController.Create();
+            var viewResult = Assert.IsType<ViewResult>(result);
         }
     
         [Fact]
         public async void Create_PostActionWithInvalidData_ReturnView()
         {
-            List<Category> categories = new List<Category>
-            {
-                new Category
-                {
-                    CategoryId = 1,
-                    CategoryName = "Test",
-                    Description = "Test",
-                }
-            };
-            List<Supplier> suppliers = new List<Supplier>
-            {
-                new Supplier
-                {
-                    SupplierId = 1,
-                    CompanyName = "Test",
-                    ContactName = "Test",
-                }
-            };
-
-            DbSet<Category> myDbSetCategory = Tools.GetQueryableMockDbSet<Category>(categories);
-            DbSet<Supplier> myDbSetSupplier = Tools.GetQueryableMockDbSet<Supplier>(suppliers);
-
-            _mockCategory.Setup(x => x.GetDbSet()).Returns(myDbSetCategory);
-            _mockSupplier.Setup(x => x.GetDbSet()).Returns(myDbSetSupplier);
+            AdjustDbSet();
 
             Product product = _products.First();
             _productsController.ModelState.AddModelError("Name", "Name is invalid");
@@ -189,6 +143,133 @@ namespace MVC.Project.Test
             var result = await _productsController.Create(_products.First());
             var redirectResult = Assert.IsType<RedirectToActionResult>(result);
             Assert.Equal("Index", redirectResult.ActionName);
+        }
+
+        [Fact]
+        public async void Edit_NullId_ReturnNotFound()
+        {
+            var result = await _productsController.Edit(null);
+            var notFoundResult = Assert.IsType<NotFoundResult>(result);
+            Assert.Equal<int>(404, notFoundResult.StatusCode);
+        }
+
+        [Theory]
+        [InlineData(0)]
+        public async void Edit_InvalidId_ReturnNotFound(int id)
+        {
+            var product = _products.FirstOrDefault(x => x.ProductId == id);
+            _mock.Setup(x => x.GetById(id)).ReturnsAsync(product);
+            var result = await _productsController.Edit(id);
+            var notFoundResult = Assert.IsType<NotFoundResult>(result);
+            Assert.Equal<int>(404, notFoundResult.StatusCode);
+        }
+
+        [Theory]
+        [InlineData(1)]
+        public async void Edit_ValidId_ReturnView(int id)
+        {
+            var product = _products.FirstOrDefault(x => x.ProductId == id);
+            _mock.Setup(x => x.GetById(id)).ReturnsAsync(product);
+
+            AdjustDbSet();
+
+
+            var result = await _productsController.Edit(id);
+            var viewResult = Assert.IsType<ViewResult>(result);
+            var modelProduct = Assert.IsAssignableFrom<Product>(viewResult.Model);
+            Assert.Equal<int>(product.ProductId, modelProduct.ProductId);
+        }
+
+        [Theory]
+        [InlineData(0,1)]
+        public async void EditPost_IdIsNotEqualProductId_ReturnNotFound(int id, int productId)
+        {
+            var product = _products.FirstOrDefault(x => x.ProductId == productId);
+
+            var result = await _productsController.Edit(id, product);
+
+            Assert.IsType<NotFoundResult>(result);
+        }
+
+        [Theory]
+        [InlineData(1, 1)]
+        public async void EditPost_ModelStateIsInvalid_ReturnView(int id, int productId)
+        {
+            var product = _products.FirstOrDefault(x => x.ProductId == productId);
+            _productsController.ModelState.AddModelError("name", "");
+
+            AdjustDbSet();
+
+            var result = await _productsController.Edit(id, product);
+
+            var viewResult = Assert.IsType<ViewResult>(result);
+            var viewData = Assert.IsAssignableFrom<Product>(viewResult.Model);
+        }
+
+        [Theory]
+        [InlineData(1, 1)]
+        public async void EditPost_DbUpdateConcurrencyExceptionProductIsNotExsist_ReturnNotFound(int id, int productId)
+        {
+            Product nullProduct = null;
+            var product = _products.FirstOrDefault(x => x.ProductId == productId);
+            _mock.Setup(x => x.Update(product)).Throws(new DbUpdateConcurrencyException());
+            _mock.Setup(x => x.GetById(id)).ReturnsAsync(nullProduct);
+
+            var result = await _productsController.Edit(id, product);
+
+            var viewResult = Assert.IsType<NotFoundResult>(result);
+        }
+
+        [Theory]
+        [InlineData(1, 1)]
+        public async void EditPost_DbUpdateConcurrencyExceptionProductIsExsist_ReturnNotFound(int id, int productId)
+        {
+            var product = _products.FirstOrDefault(x => x.ProductId == productId);
+            _mock.Setup(x => x.Update(product)).Throws(new DbUpdateConcurrencyException());
+            _mock.Setup(x => x.GetById(id)).ReturnsAsync(product);
+
+            await Assert.ThrowsAsync<DbUpdateConcurrencyException>(async () => await _productsController.Edit(id, product));
+        }
+
+        [Theory]
+        [InlineData(1, 1)]
+        public async void EditPost_WithVaildData_ReturnRedirectToIndexAction(int id, int productId)
+        {
+            var product = _products.FirstOrDefault(x => x.ProductId == productId);
+            _mock.Setup(x => x.Update(product));
+
+            var result = await _productsController.Edit(id, product);
+
+            var redirectAction = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Equal("Index", redirectAction.ActionName);
+        }
+
+        private void AdjustDbSet()
+        {
+            List<Category> categories = new List<Category>
+            {
+                new Category
+                {
+                    CategoryId = 1,
+                    CategoryName = "Test",
+                    Description = "Test",
+                }
+            };
+            List<Supplier> suppliers = new List<Supplier>
+            {
+                new Supplier
+                {
+                    SupplierId = 1,
+                    CompanyName = "Test",
+                    ContactName = "Test",
+                }
+            };
+
+            DbSet<Category> myDbSetCategory = Tools.GetQueryableMockDbSet<Category>(categories);
+            DbSet<Supplier> myDbSetSupplier = Tools.GetQueryableMockDbSet<Supplier>(suppliers);
+
+            _mockCategory.Setup(x => x.GetDbSet()).Returns(myDbSetCategory);
+            _mockSupplier.Setup(x => x.GetDbSet()).Returns(myDbSetSupplier);
         }
     }
 }

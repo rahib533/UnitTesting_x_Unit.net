@@ -9,3 +9,4 @@ C:\Users\cafarovr\source\repos\UnitTesting\Calculator\obj\Debug\net5.0\Calculato
 C:\Users\cafarovr\source\repos\UnitTesting\Calculator\obj\Debug\net5.0\Calculator.dll
 C:\Users\cafarovr\source\repos\UnitTesting\Calculator\obj\Debug\net5.0\ref\Calculator.dll
 C:\Users\cafarovr\source\repos\UnitTesting\Calculator\obj\Debug\net5.0\Calculator.pdb
+C:\Users\cafarovr\source\repos\UnitTesting\Calculator\obj\Debug\net5.0\Calculator.csprojAssemblyReference.cache
