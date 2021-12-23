@@ -148,4 +148,9 @@ C:\Users\cafarovr\source\repos\UnitTesting\MVC.Project\obj\Debug\net5.0\Razor\Vi
 C:\Users\cafarovr\source\repos\UnitTesting\MVC.Project\obj\Debug\net5.0\Razor\Views\Products\Details.cshtml.g.cs
 C:\Users\cafarovr\source\repos\UnitTesting\MVC.Project\obj\Debug\net5.0\Razor\Views\Products\Edit.cshtml.g.cs
 C:\Users\cafarovr\source\repos\UnitTesting\MVC.Project\obj\Debug\net5.0\Razor\Views\Products\Index.cshtml.g.cs
+C:\Users\cafarovr\source\repos\UnitTesting\MVC.Project\obj\Debug\net5.0\Razor\Views\Products1\Create.cshtml.g.cs
+C:\Users\cafarovr\source\repos\UnitTesting\MVC.Project\obj\Debug\net5.0\Razor\Views\Products1\Delete.cshtml.g.cs
+C:\Users\cafarovr\source\repos\UnitTesting\MVC.Project\obj\Debug\net5.0\Razor\Views\Products1\Details.cshtml.g.cs
+C:\Users\cafarovr\source\repos\UnitTesting\MVC.Project\obj\Debug\net5.0\Razor\Views\Products1\Edit.cshtml.g.cs
+C:\Users\cafarovr\source\repos\UnitTesting\MVC.Project\obj\Debug\net5.0\Razor\Views\Products1\Index.cshtml.g.cs
 C:\Users\cafarovr\source\repos\UnitTesting\MVC.Project\obj\Debug\net5.0\MVC.Project.csprojAssemblyReference.cache

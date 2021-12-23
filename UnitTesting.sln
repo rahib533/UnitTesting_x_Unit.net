@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator", "Calculator\Ca
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVC.Project", "MVC.Project\MVC.Project.csproj", "{5D78FF5F-9F07-4A7F-B27E-092257D0FB3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC.Project.Test", "MVC.Project.Test\MVC.Project.Test.csproj", "{23F8E939-E00C-4604-9DE1-D4E7256F9560}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVC.Project.Test", "MVC.Project.Test\MVC.Project.Test.csproj", "{23F8E939-E00C-4604-9DE1-D4E7256F9560}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealWorldUnitTest", "RealWorldUnitTest\RealWorldUnitTest.csproj", "{7D80BAC8-CB49-47B2-B348-F6C2F2E6CF37}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{23F8E939-E00C-4604-9DE1-D4E7256F9560}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23F8E939-E00C-4604-9DE1-D4E7256F9560}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23F8E939-E00C-4604-9DE1-D4E7256F9560}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D80BAC8-CB49-47B2-B348-F6C2F2E6CF37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D80BAC8-CB49-47B2-B348-F6C2F2E6CF37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D80BAC8-CB49-47B2-B348-F6C2F2E6CF37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D80BAC8-CB49-47B2-B348-F6C2F2E6CF37}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
